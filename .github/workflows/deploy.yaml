@@ -76,9 +76,9 @@ jobs:
           username: ${{ github.actor }}             # GitHub username (actor triggering the workflow)
           password: ${{ secrets.GITHUB_TOKEN }}     # Automatically provided GitHub token
 
-      # Step 4: Build the Docker image and tag it with the repository name and 'latest'
+      # Step 4: Build the Docker image and tag it with the repository id (for my username has capital letters :clown:) and 'latest'
       - name: Build Docker image
-        run: docker build -t ghcr.io/${{ github.repository }}:latest .
+        run: docker build -t ghcr.io/${{ github.repository_id }}:latest . 
 
       # Step 5: Push the Docker image to GitHub Container Registry
       - name: Push Docker image
