@@ -62,7 +62,7 @@ jobs:
         run: |
             echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
         env:
-            OWNER: '${{ github.repository_owner }}'
+            OWNER: '${{ github.repository }}'
 
       # Step 1: Checkout the repository code
       - name: Checkout code
