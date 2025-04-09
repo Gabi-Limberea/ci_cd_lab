@@ -58,6 +58,12 @@ jobs:
     if: success()
 
     steps:
+      - name: set lower case owner name
+        run: |
+            echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+        env:
+            OWNER: '${{ github.repository_owner }}'
+
       # Step 1: Checkout the repository code
       - name: Checkout code
         uses: actions/checkout@v4
@@ -78,8 +84,8 @@ jobs:
 
       # Step 4: Build the Docker image and tag it with the repository id (for my username has capital letters :clown:) and 'latest'
       - name: Build Docker image
-        run: docker build -t ghcr.io/${{ github.repository_id }}:latest . 
+        run: docker build -t ghcr.io/${{ env.OWNER_LC }}:latest . 
 
       # Step 5: Push the Docker image to GitHub Container Registry
       - name: Push Docker image
-        run: docker push ghcr.io/${{ github.repository_id }}:latest
+        run: docker push ghcr.io/${{ env.OWNER_LC }}:latest
